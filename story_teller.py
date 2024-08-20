@@ -5,7 +5,7 @@ import torch
 # Load pre-trained GPT-2 model and tokenizer
 model_name = "gpt2"  # You can use 'gpt2-medium', 'gpt2-large', etc.
 model = AutoModelForCausalLM.from_pretrained(model_name)
-tokenizer = AutoTokenizer.from_pretrained(model_name)
+tokenizer = AutoTokenizer.from_pretrained(model_name, clean_up_tokenization_spaces=True)
 
 # Set device to GPU if available, else use CPU
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -24,8 +24,8 @@ def ensure_complete_sentence(text):
 def generate_story(prompt):
     try:
         # Encode the prompt
-        inputs = tokenizer.encode(prompt, return_tensors="pt").to(device)
-
+        inputs = tokenizer.encode(prompt, return_tensors="pt", padding=True, truncation=True).to(device)
+        
         # Generate story
         outputs = model.generate(
             inputs,
@@ -36,7 +36,7 @@ def generate_story(prompt):
             temperature=0.7,
             top_p=0.95,
             do_sample=True,
-            early_stopping=True
+            early_stopping=False  # Remove early_stopping if num_beams is not used
         )
 
         # Decode the generated text
