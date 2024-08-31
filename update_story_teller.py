@@ -65,7 +65,7 @@ def main():
     st.write("Enter a story prompt to generate a complete story.")
 
     # Path to the background image
-    image_path = "D:/Desktop/MCA 3rd sem/story generator/background.jpg"  # Update this to the correct path
+    image_path = "background.jpg"  # Update this to the correct path
     image_base64 = get_base64_image(image_path)
 
     # Adding background image and custom styles using CSS
