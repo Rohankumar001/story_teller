@@ -58,7 +58,7 @@ def get_base64_image(image_path):
 # Streamlit app
 def main():
     # Path to the background image
-    image_path = "story.jpg"
+    image_path = "image.jpg"
     image_base64 = get_base64_image(image_path)
 
     # Adding background image and custom styles using CSS
